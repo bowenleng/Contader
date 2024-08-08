@@ -4,6 +4,8 @@ import java.util.function.DoubleFunction;
 
 public class SuppMath {
     public static final double PI2 = Math.PI * Math.PI;
+    public static final double PHI = (1 + Math.sqrt(5)) / 2;
+
     private static final double[] FACTORIALS = new double[]{1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880,
             2628800, 39916800, 479001600, 6.2270208E+9, 8.71782912E+10, 1.307674368E+12, 2.0922789888E+13,
             3.55687428096E+14, 6.402373705728E+15, 1.216451004088E+17, 2.432902008177E+18, 5.109094217170944E+19,
@@ -25,7 +27,11 @@ public class SuppMath {
 
     public static double csc(double angle) {
         angle %= 2 * Math.PI;
-        return  0;
+        return 0;
+    }
+
+    private static double cscApprox(double angle) {
+        return ((5 * PI2) - (4 * Math.PI) * (Math.PI - angle)) / (16 * Math.PI * (Math.PI - angle));
     }
 
     public static double summation(int start, int end, DoubleFunction<Double> function) {
@@ -44,9 +50,5 @@ public class SuppMath {
             summed *= function.apply(i);
         }
         return summed;
-    }
-
-    private static double cscApprox(double angle) {
-        return ((5 * PI2) - (4 * Math.PI) * (Math.PI - angle)) / (16 * Math.PI * (Math.PI - angle));
     }
 }
