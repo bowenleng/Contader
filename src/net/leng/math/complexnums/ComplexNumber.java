@@ -96,7 +96,7 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
      * @return the existing complex number with the new complex number added on to it.
      * */
     public ComplexNumber addAssign(ComplexNumber pNum) {
-        return pNum != null ? addAssign(pNum) : this;
+        return pNum != null ? add(pNum) : this;
     }
 
     /** Increments a number by one in the complex plane by adding sqrt(2)/2 + isqrt(2)/2 to the existing number.
