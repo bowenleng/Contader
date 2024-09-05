@@ -3,9 +3,6 @@ package net.leng.math.complexnums;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @Author NukolLodda
- * */
 public class ComplexNumber implements Comparable<ComplexNumber> {
     private double real;
 
