@@ -410,6 +410,11 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
         return real + symb + imaginary + "i";
     }
 
+    @Contract(value = " -> new", pure = true)
+    public static @NotNull ComplexNumber of() {
+        return new ComplexNumber();
+    }
+
     @Contract(value = "_ -> new", pure = true)
     public static @NotNull ComplexNumber of(double pNum) {
         return new ComplexNumber(pNum);

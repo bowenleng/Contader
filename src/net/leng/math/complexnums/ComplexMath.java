@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
+import java.util.function.Function;
 
 public class ComplexMath {
     private static final ComplexNumber ZERO = new ComplexNumber();
@@ -240,5 +241,23 @@ public class ComplexMath {
         double real = Math.sqrt(r) * Math.cos(theta / 2);
         double imaginary = Math.sqrt(r) * Math.sin(theta / 2);
         return new ComplexNumber(real, imaginary);
+    }
+
+    public static @NotNull ComplexNumber complexSummation(int start, int end, Function<Double, Double> function) {
+        if (end < start) return ComplexNumber.of();
+        ComplexNumber summed = ComplexNumber.of();
+        for (int i = start; i <= end; i++) {
+            summed.addAssign(function.apply((double)i));
+        }
+        return summed;
+    }
+
+    public static @NotNull ComplexNumber complexProduct(int start, int end, Function<Double, Double> function) {
+        if (end < start) return ComplexNumber.of();
+        ComplexNumber prod = ComplexNumber.of();
+        for (int i = start; i <= end; i++) {
+            prod.multiplyAssign(function.apply((double)i));
+        }
+        return prod;
     }
 }
