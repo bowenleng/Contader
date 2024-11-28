@@ -1,6 +1,8 @@
 package net.leng.math;
 
-import java.security.InvalidParameterException;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 public class Statistics {
@@ -48,7 +50,7 @@ public class Statistics {
      * @return The z-score of data in comparison to vals.
      * */
     public static double standardizedScore(int data, double... vals) {
-        if (data < 0 || data >= vals.length) throw new InvalidParameterException();
+        if (data < 0 || data >= vals.length) throw new IllegalArgumentException();
         double sd = standardDeviation(vals);
         double mean = mean(vals);
         return (vals[data] - mean) / sd;
@@ -102,15 +104,45 @@ public class Statistics {
         return vals[hl];
     }
 
-    public static double[] quartiles(double... vals) {
+    @Contract("_ -> new")
+    public static double @NotNull [] quartiles(double... vals) {
         Arrays.sort(vals);
         int len = vals.length;
         int hl = len >> 1;
         int ql = hl >> 1;
-        double median = len % 2 == 0 ? (vals[hl-1] + vals[hl]) / 2 : vals[hl];
+        double median = (len & 1) == 0 ? (vals[hl-1] + vals[hl]) / 2 : vals[hl];
         double q1 = (hl & 1) == 0 ? (vals[ql-1] + vals[ql]) / 2 : vals[ql];
-        double q3 = (hl & 1) == 0 ? (vals[3 * ql - 1] + vals[3 * ql]) / 2 : vals[ql];
+        double q3 = (hl & 1) == 0 ? (vals[3 * ql - 1] + vals[3 * ql]) / 2 : vals[3 * ql];
         return new double[]{q1, median, q3};
+    }
+
+    @Contract(pure = true)
+    public static double smallest(double @NotNull ... vals) {
+        double smallest = Double.MAX_VALUE;
+        for (double d : vals) {
+            if (d < smallest) smallest = d;
+        }
+        return smallest;
+    }
+
+    @Contract(pure = true)
+    public static double largest(double @NotNull ... vals) {
+        double largest = -Double.MAX_VALUE;
+        for (double d : vals) {
+            if (d > largest) largest = d;
+        }
+        return largest;
+    }
+
+    @Contract(pure = true)
+    public static double range(double @NotNull ... vals) {
+        double smallest = Double.MAX_VALUE;
+        double largest = -Double.MAX_VALUE;
+        for (double d : vals) {
+            if (d > largest) largest = d;
+            if (d < smallest) smallest = d;
+        }
+        return largest - smallest;
     }
 
     /**
@@ -125,7 +157,7 @@ public class Statistics {
      * @param b the dataset that has the "response" variables.
      * @return the correlation coefficient (r) between datasets a and b.
      * */
-    public static double correlationCoefficient(double[] a, double[] b) {
+    public static double correlationCoefficient(double @NotNull [] a, double @NotNull [] b) {
         int alen = a.length;
         int blen = b.length;
         if (alen != blen) throw new IllegalArgumentException("List sizes must be the same");
@@ -147,18 +179,28 @@ public class Statistics {
      * @return The amount of ways data can organize themselves regardless of order.
      * */
     public static int combinationCount(int r, int n) {
-        return SuppMath.factorial(n) /
-                (SuppMath.factorial(r) * SuppMath.factorial(n - r));
+        return permutationCount(r, n) / SuppMath.factorial(r);
     }
 
     /** A permutation in statistics is how many ways elements in a set
      * can organize themselves if "r" slots are available in which order is relevant.
      * @param r The number of slots available a dataset.
      * @param n The total count of how many elements are in a dataset.
-     * @return The amount of ways data can organize themselves..
+     * @return The amount of ways data can organize themselves.
      * */
     public static int permutationCount(int r, int n) {
-        return SuppMath.factorial(n) /
-                SuppMath.factorial(n - r);
+        return (int)SuppMath.product(n - r,  r, v -> (double)v);
+    }
+
+    public static double probability(int r, int n) {
+        return (double)r / n;
+    }
+
+    public static double binomialPdf(int n, double p, int x) {
+        return combinationCount(x, n) * Math.pow(p, x) * Math.pow(1 - p, n - x);
+    }
+
+    public static double binomialCdf(int n, double p, int x) {
+        return SuppMath.summation(0, x, v -> binomialPdf(n, p, v));
     }
 }

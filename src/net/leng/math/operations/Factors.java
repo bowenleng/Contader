@@ -8,8 +8,8 @@ public class Factors {
         if (pNum < 1) throw new IllegalArgumentException();
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
-        if (pNum % 2 == 0) list.add(2);
-        for (int i = 3; i < pNum / 2; i += 2) {
+        if ((pNum & 1) == 0) list.add(2);
+        for (int i = 3; i < (pNum >> 1); i += 2) {
             if (pNum % i == 0) list.add(i);
         }
         return list;
@@ -24,8 +24,8 @@ public class Factors {
     public static int numberOfFactors(int pNum) {
         if (pNum < 1) throw new IllegalArgumentException();
         int factors = 1;
-        if (pNum % 2 == 0) factors++;
-        for (int i = 3; i < pNum / 2; i += 2) {
+        if ((pNum & 1) == 0) factors++;
+        for (int i = 3; i < (pNum >> 1); i += 2) {
             if (pNum % i == 0) factors++;
         }
         return factors;
@@ -39,12 +39,12 @@ public class Factors {
         HashMap<Integer, Integer> map = new HashMap<>();
         int c = 0;
         int modified = pNum;
-        while (modified % 2 == 0) {
+        while ((modified & 1) == 0) {
             c++;
-            modified /= 2;
+            modified >>= 1;
         }
         map.put(2, c);
-        for (int i = 3; i < pNum / 2; i += 2) {
+        for (int i = 3; i < (pNum >> 1); i += 2) {
             c = 0;
             while (modified % i == 0) {
                 c++;

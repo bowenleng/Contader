@@ -1,9 +1,6 @@
 package net.leng.math;
 
-import net.leng.math.complexnums.ComplexMath;
-import net.leng.math.complexnums.ComplexNumber;
-
-import java.util.function.DoubleFunction;
+import java.util.function.IntFunction;
 
 public class SuppMath {
     public static final double PI2 = Math.PI * Math.PI;
@@ -23,10 +20,10 @@ public class SuppMath {
     public static int factorial(int num) {
         if (num < 0) throw new IllegalArgumentException("Cannot take a basic factorial of a negative number");
         if (num == 0) return 1;
-        return (int)product(1, num, n -> n);
+        return (int)product(1, num, n -> (double)n);
     }
 
-    public static double summation(int start, int end, DoubleFunction<Double> function) {
+    public static double summation(int start, int end, IntFunction<Double> function) {
         if (end < start) return 0;
         double summed = 0;
         for (int i = start; i <= end; i++) {
@@ -35,7 +32,7 @@ public class SuppMath {
         return summed;
     }
 
-    public static double product(int start, int end, DoubleFunction<Double> function) {
+    public static double product(int start, int end, IntFunction<Double> function) {
         if (end < start) return 0;
         double prod = 1;
         for (int i = start; i <= end; i++) {
@@ -48,7 +45,7 @@ public class SuppMath {
         if (num <= 1) throw new IllegalArgumentException("Cannot determine whether number is prime");
         if (num == 2 || num == 3) return true;
         if ((num & 1) == 0 || num % 3 == 0) return false;
-        for (int i = 5; i <= num/2; i += ((i + 2) % 3 == 0 ? 4 : 2)) {
+        for (int i = 5; i <= (num >> 1); i += ((i + 2) % 3 == 0 ? 4 : 2)) {
             if (num % i == 0) return false;
         }
         return true;
@@ -57,7 +54,7 @@ public class SuppMath {
     public static boolean isPerfect(int num) {
         if (num <= 0) throw new IllegalArgumentException("Cannot determine whether number is perfect");
         int sum = 1;
-        for (int i = 2; i <= num/2; i++) {
+        for (int i = 2; i <= (num >> 1); i++) {
             if (num % i == 0) sum += i;
         }
         return sum == num;
