@@ -1,4 +1,4 @@
-package net.leng.math.complexnums;
+package net.leng.math.directionalnum;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -424,5 +424,12 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
     @Contract(value = "_, _ -> new", pure = true)
     public static ComplexNumber of(double pReal, double pImaginary) {
         return new ComplexNumber(pReal, pImaginary);
+    }
+
+    public static @NotNull ComplexNumber fromMagnitude(double pMagnitude, double pAngle) {
+        double a = pAngle % (2 * Math.PI);
+        double real = pMagnitude * Math.cos(a);
+        double imaginary = pMagnitude * Math.sin(a);
+        return of(real, imaginary);
     }
 }

@@ -35,6 +35,18 @@ public class Factors {
         return numberOfFactors(pNum) > 1;
     }
 
+    public static int gcd(int a, int b) {
+        int result = 1;
+        for (int i = 2; i < Math.min(a, b); i++) {
+            if (a % i == 0 && b % i == 0) {
+                result *= i;
+                a /= i;
+                b /= i;
+            }
+        }
+        return result;
+    }
+
     public static HashMap<Integer, Integer> findPrimeFactorization(int pNum) {
         HashMap<Integer, Integer> map = new HashMap<>();
         int c = 0;

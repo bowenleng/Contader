@@ -1,4 +1,4 @@
-package net.leng.math.complexnums;
+package net.leng.math.directionalnum;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -243,6 +243,10 @@ public class ComplexMath {
         return new ComplexNumber(real, imaginary);
     }
 
+    public static double angle(ComplexNumber pNum) {
+        return Math.atan(pNum.getImaginary() / pNum.getReal());
+    }
+
     public static @NotNull ComplexNumber complexSummation(int start, int end, Function<Double, Double> function) {
         if (end < start) return ComplexNumber.of();
         ComplexNumber summed = ComplexNumber.of();
@@ -259,5 +263,15 @@ public class ComplexMath {
             prod.multiplyAssign(function.apply((double)i));
         }
         return prod;
+    }
+
+    public static ComplexNumber complexDerivative(Function<ComplexNumber, ComplexNumber> function, ComplexNumber z) {
+        double direction = angle(z);
+        double x = abs(z);
+        double v = Math.nextUp(x);
+        ComplexNumber z1 = ComplexNumber.fromMagnitude(v, direction);
+        ComplexNumber y = function.apply(z);
+        ComplexNumber y1 = function.apply(z1);
+        return (y1.subtract(y)).divide(z1.subtract(z));
     }
 }
