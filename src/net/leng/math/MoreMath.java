@@ -86,11 +86,12 @@ public class MoreMath {
         return prod;
     }
 
-    /** The derivative is used to find the instantaneous rate of change occurring at a certain point on the graph.
+    /** The derivative (d/dx) is used to find the instantaneous rate of change occurring at a certain point on the graph.
      * @param function The function that is being differentiated.
      * @param x The value inputted into the differential function "f'(x)"
      * @return The instantaneous rate of change at x*/
     public static double derivative(DoubleFunction<Double> function, double x) {
+        if (Double.isNaN(x) || Double.isNaN(limit(function, x))) return Double.NaN;
         double x1 = Math.nextUp((float)x);
         double y = limit(function, x);
         double y1 = limit(function, x1);
@@ -244,7 +245,9 @@ public class MoreMath {
         return r;
     }
 
-    /***/
+    /**
+     * The erf function, also known as the Gauss Error Function is a complex contour integral which is path independent.
+     * */
     public static double erf(double z) {
         return 2 / Math.sqrt(Math.PI) * integral(t -> Math.exp(-(t * t)), 0, z);
     }

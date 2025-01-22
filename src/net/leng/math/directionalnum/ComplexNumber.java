@@ -8,6 +8,7 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
 
     private double imaginary;
 
+    @Deprecated
     /** Defines a new complex number using a real and an imaginary component.
      * @param pReal The real component of the complex number.
      * @param pImaginary the imaginary component of the complex number.
@@ -17,6 +18,7 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
         this.imaginary = pImaginary;
     }
 
+    @Deprecated
     /** Defines a new real number with complex number behavior.
      * @param pReal The number to be defined anew as a complex number.
      * */
@@ -24,6 +26,7 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
         this(pReal, 0);
     }
 
+    @Deprecated
     /** Defines a new complex number by duplicating another one.
      * @param pNum A complex number to be duplicated.
      * */
