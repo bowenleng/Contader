@@ -4,5 +4,5 @@ ___
 <br>
 <br>
 Contader de Tausle Dufasedo means "the storage of a thousand thoughts" in my constructed language(conlang)
-and is shortened either as BdTD or just Boteleder. This is a library of code
+and is shortened either as CdTD or just Contader. This is a library of code
 I created intended to solve math problems and simplify my other projects.
