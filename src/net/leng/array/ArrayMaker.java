@@ -1,14 +1,10 @@
 package net.leng.array;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 import java.util.function.Function;
 
 public class ArrayMaker {
-    @Contract(pure = true)
-    public static <T extends Comparable<T>> T @NotNull [] makeSortedArray(T @NotNull [] list) {
+    public static <T extends Comparable<T>> T[] makeSortedArray(T[] list) {
         int len = list.length;
         T[] sorted = (T[])(new Comparable[len]);
         for (int i = 0; i < len; i++) {
@@ -23,8 +19,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static byte @NotNull [] makeSortedArray(byte @NotNull [] list) {
+    public static byte[] makeSortedArray(byte[] list) {
         int len = list.length;
         byte[] sorted = new byte[len];
         for (int i = 0; i < len; i++) {
@@ -39,8 +34,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static char @NotNull [] makeSortedArray(char @NotNull [] list) {
+    public static char[] makeSortedArray(char[] list) {
         int len = list.length;
         char[] sorted = new char[len];
         for (int i = 0; i < len; i++) {
@@ -55,8 +49,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static double @NotNull [] makeSortedArray(double @NotNull [] list) {
+    public static double[] makeSortedArray(double[] list) {
         int len = list.length;
         double[] sorted = new double[len];
         for (int i = 0; i < len; i++) {
@@ -71,8 +64,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static float @NotNull [] makeSortedArray(float @NotNull [] list) {
+    public static float[] makeSortedArray(float[] list) {
         int len = list.length;
         float[] sorted = new float[len];
         for (int i = 0; i < len; i++) {
@@ -87,8 +79,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static int @NotNull [] makeSortedArray(int @NotNull [] list) {
+    public static int[] makeSortedArray(int[] list) {
         int len = list.length;
         int[] sorted = new int[len];
         for (int i = 0; i < len; i++) {
@@ -103,8 +94,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static long @NotNull [] makeSortedArray(long @NotNull [] list) {
+    public static long[] makeSortedArray(long[] list) {
         int len = list.length;
         long[] sorted = new long[len];
         for (int i = 0; i < len; i++) {
@@ -119,8 +109,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static short @NotNull [] makeSortedArray(short @NotNull [] list) {
+    public static short[] makeSortedArray(short[] list) {
         int len = list.length;
         short[] sorted = new short[len];
         for (int i = 0; i < len; i++) {
@@ -135,7 +124,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    public static <T> T @NotNull [] makeSortedArray(T @NotNull [] list, Comparator<T> comparator) {
+    public static <T> T[] makeSortedArray(T[] list, Comparator<T> comparator) {
         int len = list.length;
         T[] sorted = (T[])(new Object[len]);
         for (int i = 0; i < len; i++) {
@@ -150,8 +139,7 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static byte @NotNull [] makeSortedArray(byte @NotNull [] list, Comparator<Byte> comparator) {
+    public static byte[] makeSortedArray(byte[] list, Comparator<Byte> comparator) {
         int len = list.length;
         byte[] sorted = new byte[len];
         for (int i = 0; i < len; i++) {
@@ -166,8 +154,8 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static char @NotNull [] makeSortedArray(char @NotNull [] list, Comparator<Character> comparator) {
+
+    public static char[] makeSortedArray(char[] list, Comparator<Character> comparator) {
         int len = list.length;
         char[] sorted = new char[len];
         for (int i = 0; i < len; i++) {
@@ -182,8 +170,8 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static double @NotNull [] makeSortedArray(double @NotNull [] list, Comparator<Double> comparator) {
+
+    public static double[] makeSortedArray(double[] list, Comparator<Double> comparator) {
         int len = list.length;
         double[] sorted = new double[len];
         for (int i = 0; i < len; i++) {
@@ -198,8 +186,8 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static float @NotNull [] makeSortedArray(float @NotNull [] list, Comparator<Float> comparator) {
+
+    public static float[] makeSortedArray(float[] list, Comparator<Float> comparator) {
         int len = list.length;
         float[] sorted = new float[len];
         for (int i = 0; i < len; i++) {
@@ -214,8 +202,8 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static int @NotNull [] makeSortedArray(int @NotNull [] list, Comparator<Integer> comparator) {
+
+    public static int[] makeSortedArray(int[] list, Comparator<Integer> comparator) {
         int len = list.length;
         int[] sorted = new int[len];
         for (int i = 0; i < len; i++) {
@@ -230,8 +218,8 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static long @NotNull [] makeSortedArray(long @NotNull [] list, Comparator<Long> comparator) {
+
+    public static long[] makeSortedArray(long[] list, Comparator<Long> comparator) {
         int len = list.length;
         long[] sorted = new long[len];
         for (int i = 0; i < len; i++) {
@@ -246,8 +234,8 @@ public class ArrayMaker {
         return sorted;
     }
 
-    @Contract(pure = true)
-    public static short @NotNull [] makeSortedArray(short @NotNull [] list, Comparator<Short> comparator) {
+
+    public static short[] makeSortedArray(short[] list, Comparator<Short> comparator) {
         int len = list.length;
         short[] sorted = new short[len];
         for (int i = 0; i < len; i++) {
@@ -262,17 +250,17 @@ public class ArrayMaker {
         return sorted;
     }
 
-    public static <T> T @NotNull [] union(T @NotNull [] a, T[] b) {
+    public static <T> T[] union(T[] a, T[] b) {
         CombinedArray<T> comb = new CombinedArray<>(a, b);
         return comb.union();
     }
 
-    public static <T> T @NotNull [] intersection(T @NotNull [] a, T[] b) {
+    public static <T> T[] intersection(T[] a, T[] b) {
         CombinedArray<T> comb = new CombinedArray<>(a, b);
         return comb.intersection();
     }
 
-    public static <T> T @NotNull [] createArrayFromFormula(T @NotNull [] items, Function<T, T> formula) {
+    public static <T> T[] createArrayFromFormula(T[] items, Function<T, T> formula) {
         int len = items.length;
         T[] arr = (T[])(new Object[len]);
         for (int i = 0; i < len; i++) {

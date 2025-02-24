@@ -1,8 +1,5 @@
 package net.leng.math.directionalnum;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 public class ComplexNumber implements Comparable<ComplexNumber> {
     private double real;
 
@@ -413,23 +410,19 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
         return real + symb + imaginary + "i";
     }
 
-    @Contract(value = " -> new", pure = true)
-    public static @NotNull ComplexNumber of() {
+    public static ComplexNumber of() {
         return new ComplexNumber();
     }
 
-    @Contract(value = "_ -> new", pure = true)
-    public static @NotNull ComplexNumber of(double pNum) {
+    public static ComplexNumber of(double pNum) {
         return new ComplexNumber(pNum);
     }
 
-    @NotNull
-    @Contract(value = "_, _ -> new", pure = true)
     public static ComplexNumber of(double pReal, double pImaginary) {
         return new ComplexNumber(pReal, pImaginary);
     }
 
-    public static @NotNull ComplexNumber fromMagnitude(double pMagnitude, double pAngle) {
+    public static ComplexNumber fromMagnitude(double pMagnitude, double pAngle) {
         double a = pAngle % (2 * Math.PI);
         double real = pMagnitude * Math.cos(a);
         double imaginary = pMagnitude * Math.sin(a);

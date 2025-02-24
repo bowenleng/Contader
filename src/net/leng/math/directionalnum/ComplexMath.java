@@ -1,8 +1,5 @@
 package net.leng.math.directionalnum;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 import java.util.function.Function;
 
@@ -14,38 +11,32 @@ public class ComplexMath {
     private ComplexMath() {} // ensures no one has access to the object
 
     /** @return  Value of sqrt(-1) */
-    @Contract(value = " -> new", pure = true)
-    public static @NotNull ComplexNumber i() {
+    public static ComplexNumber i() {
         return new ComplexNumber(0, 1);
     }
 
     /** @return Value of i times {@link Math}.PI*/
-    @Contract(value = " -> new", pure = true)
-    public static @NotNull ComplexNumber iPi() {
+    public static ComplexNumber iPi() {
         return new ComplexNumber(0, Math.PI);
     }
 
     /** @return Value of 0 stored in the form of a complex number. */
-    @Contract(value = " -> new", pure = true)
-    public static @NotNull ComplexNumber zero() {
+    public static ComplexNumber zero() {
         return new ComplexNumber();
     }
 
     /** @return  Value of negative infinity stored in the form of a complex number. */
-    @Contract(value = " -> new", pure = true)
-    public static @NotNull ComplexNumber negativeInfinity() {
+    public static ComplexNumber negativeInfinity() {
         return new ComplexNumber(Double.NEGATIVE_INFINITY);
     }
 
     /** @return Value of positive infinity stored in the form of a complex number. */
-    @Contract(value = " -> new", pure = true)
-    public static @NotNull ComplexNumber positiveInfinity() {
+    public static ComplexNumber positiveInfinity() {
         return new ComplexNumber(Double.POSITIVE_INFINITY);
     }
 
     /** @return Not a number stored as a complex number. Generally returned in place of {@link ArithmeticException}*/
-    @Contract(value = " -> new", pure = true)
-    public static @NotNull ComplexNumber nan() {
+    public static ComplexNumber nan() {
         return new ComplexNumber(Double.NaN);
     }
 
@@ -76,8 +67,7 @@ public class ComplexMath {
      * @param pNum the complex number value.
      * @return e to the power of a complex number.
      * */
-    @Contract("null -> new")
-    public static @NotNull ComplexNumber exp(ComplexNumber pNum) {
+    public static ComplexNumber exp(ComplexNumber pNum) {
         if (pNum == null || pNum.equals(ZERO)) return new ComplexNumber(1);
         double multiplier = Math.exp(pNum.getReal());
         double arg = (pNum.getImaginary() / 2) * Math.log(Math.exp(2));
@@ -93,7 +83,7 @@ public class ComplexMath {
      * @param pNum the complex number value.
      * @return a number that if e is taken to the power of, will return the inputted complex number.
      * */
-    public static @NotNull ComplexNumber log(ComplexNumber pNum) {
+    public static ComplexNumber log(ComplexNumber pNum) {
         if (pNum == null || pNum.equals(ZERO)) return negativeInfinity();
         double real = Math.log(abs(pNum));
         double imaginary = arg(pNum);
@@ -105,7 +95,7 @@ public class ComplexMath {
      * @param pNum the complex number value.
      * @return a number that if 10 is taken to the power of, will return the inputted complex number.
      * */
-    public static @NotNull ComplexNumber log10(ComplexNumber pNum) {
+    public static ComplexNumber log10(ComplexNumber pNum) {
         if (pNum == null || pNum.equals(ZERO)) return negativeInfinity();
         double real = Math.log10(abs(pNum));
         double imaginary = arg(pNum) / Math.log(10);
@@ -113,8 +103,7 @@ public class ComplexMath {
     }
 
     /** @return the complex number with the greatest absolute value between a and b. */
-    @Contract("null, !null -> param2; !null, null -> param1")
-    public static @NotNull ComplexNumber max(ComplexNumber a, ComplexNumber b) {
+    public static ComplexNumber max(ComplexNumber a, ComplexNumber b) {
         if (a == null) {
             return b == null ? zero() : b;
         }
@@ -123,14 +112,13 @@ public class ComplexMath {
     }
 
     /** @return the complex number with the smallest absolute value between a and b. */
-    public static @NotNull ComplexNumber min(ComplexNumber a, ComplexNumber b) {
+    public static ComplexNumber min(ComplexNumber a, ComplexNumber b) {
         if (a == null || b == null) return zero();
         return a.isSmallerThan(b) ? a : b;
     }
 
     /** @return a complex number with a random value between 0 and 1 inclusive-exclusive on both the real and imaginary components.*/
-    @Contract(" -> new")
-    public static @NotNull ComplexNumber random() {
+    public static ComplexNumber random() {
         return new ComplexNumber(RANDOM.nextDouble(), RANDOM.nextDouble());
     }
 
@@ -139,8 +127,7 @@ public class ComplexMath {
      * @param pBase a real number being taken to the power of.
      * @param pExp a complex exponent.
      * @return A real number to the power of a complex number. */
-    @Contract("_, null -> new")
-    public static @NotNull ComplexNumber pow(double pBase, ComplexNumber pExp) {
+    public static ComplexNumber pow(double pBase, ComplexNumber pExp) {
         if (pExp == null || pExp.equals(ZERO)) {
             return new ComplexNumber(1);
         }
@@ -158,7 +145,7 @@ public class ComplexMath {
      * @param pExp real exponent.
      * @return A complex number to the power of a real number.
      * */
-    public static @NotNull ComplexNumber pow(ComplexNumber pBase, double pExp) {
+    public static ComplexNumber pow(ComplexNumber pBase, double pExp) {
         if (pBase == null || pBase.equals(ZERO)) {
             return pExp < 0 ? positiveInfinity() : new ComplexNumber();
         }
@@ -207,8 +194,7 @@ public class ComplexMath {
      * @param pNum complex number taken to the cube root.
      * @return A complex number equal to the cube root of the inputted complex number.
      * */
-    @Contract("null -> new")
-    public static @NotNull ComplexNumber cbrt(ComplexNumber pNum) {
+    public static ComplexNumber cbrt(ComplexNumber pNum) {
         if (pNum == null) return new ComplexNumber();
         double r = abs(pNum);
         double theta = arg(pNum);
@@ -223,7 +209,7 @@ public class ComplexMath {
      * @param pNum real number inputted.
      * @return the square root of a real number.
      * */
-    public static @NotNull ComplexNumber sqrt(double pNum) {
+    public static ComplexNumber sqrt(double pNum) {
         return pNum >= 0 ? new ComplexNumber(Math.sqrt(pNum)) : new ComplexNumber(0, Math.sqrt(-pNum));
     }
 
@@ -233,8 +219,7 @@ public class ComplexMath {
      * @param pNum complex number inputted.
      * @return the square root of a complex number.
      * */
-    @Contract("null -> new")
-    public static @NotNull ComplexNumber sqrt(ComplexNumber pNum) {
+    public static ComplexNumber sqrt(ComplexNumber pNum) {
         if (pNum == null) return new ComplexNumber();
         double r = abs(pNum);
         double theta = arg(pNum);
@@ -247,7 +232,7 @@ public class ComplexMath {
         return Math.atan(pNum.getImaginary() / pNum.getReal());
     }
 
-    public static @NotNull ComplexNumber complexSummation(int start, int end, Function<Double, Double> function) {
+    public static ComplexNumber complexSummation(int start, int end, Function<Double, Double> function) {
         if (end < start) return ComplexNumber.of();
         ComplexNumber summed = ComplexNumber.of();
         for (int i = start; i <= end; i++) {
@@ -256,7 +241,7 @@ public class ComplexMath {
         return summed;
     }
 
-    public static @NotNull ComplexNumber complexProduct(int start, int end, Function<Double, Double> function) {
+    public static ComplexNumber complexProduct(int start, int end, Function<Double, Double> function) {
         if (end < start) return ComplexNumber.of();
         ComplexNumber prod = ComplexNumber.of();
         for (int i = start; i <= end; i++) {

@@ -1,8 +1,6 @@
 package net.leng.math;
 
 import net.leng.array.ArrayMaker;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 public class Statistics {
 
@@ -103,8 +101,7 @@ public class Statistics {
         return d[hl];
     }
 
-    @Contract("_ -> new")
-    public static double @NotNull [] quartiles(double... vals) {
+    public static double [] quartiles(double... vals) {
         double[] d = ArrayMaker.makeSortedArray(vals);
         int len = d.length;
         int hl = len >> 1;
@@ -115,8 +112,7 @@ public class Statistics {
         return new double[]{q1, median, q3};
     }
 
-    @Contract(pure = true)
-    public static double smallest(double @NotNull ... vals) {
+    public static double smallest(double... vals) {
         double smallest = Double.MAX_VALUE;
         for (double d : vals) {
             if (d < smallest) smallest = d;
@@ -124,8 +120,7 @@ public class Statistics {
         return smallest;
     }
 
-    @Contract(pure = true)
-    public static double largest(double @NotNull ... vals) {
+    public static double largest(double... vals) {
         double largest = -Double.MAX_VALUE;
         for (double d : vals) {
             if (d > largest) largest = d;
@@ -133,8 +128,7 @@ public class Statistics {
         return largest;
     }
 
-    @Contract(pure = true)
-    public static double range(double @NotNull ... vals) {
+    public static double range(double... vals) {
         double smallest = Double.MAX_VALUE;
         double largest = -Double.MAX_VALUE;
         for (double d : vals) {
@@ -156,7 +150,7 @@ public class Statistics {
      * @param b the dataset that has the "response" variables.
      * @return the correlation coefficient (r) between datasets a and b.
      * */
-    public static double correlationCoefficient(double @NotNull [] a, double @NotNull [] b) {
+    public static double correlationCoefficient(double[] a, double[] b) {
         int alen = a.length;
         int blen = b.length;
         if (alen != blen) throw new IllegalArgumentException("List sizes must be the same");
