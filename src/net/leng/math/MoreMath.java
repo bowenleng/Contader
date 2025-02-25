@@ -245,10 +245,25 @@ public class MoreMath {
         return r;
     }
 
-    /**
-     * The erf function, also known as the Gauss Error Function is a complex contour integral which is path independent.
-     * */
+    /** Gaussian error function */
     public static double erf(double z) {
-        return 2 / Math.sqrt(Math.PI) * integral(t -> Math.exp(-(t * t)), 0, z);
+        if (z > 2.111189348014668) return 1;
+        if (z < -2.111189348014668) return -1;
+
+        double coef = 2 / Math.sqrt(Math.PI);
+        double pow2 = z * z;
+        double[] pows = new double[64];
+        pows[0] = z;
+        for (int i = 1; i < 32; i++) {
+            pows[i] = pows[i-1] * pow2;
+        }
+        return coef * (z - pows[1]/3 + pows[2]/10 - pows[3]/42 + pows[4]/216 - pows[5]/1320 + pows[6]/9360 - pows[7]/75600
+                + pows[8]/685440 - pows[9]/6894720 + pows[10]/76204800 - pows[11]/918086400 + pows[12]/1.681295616E11
+                - pows[13]/1.805836032E11 + pows[14]/1.930376448E11 - pows[15]/4.0537905408E13 + pows[16]/6.90452066304E14
+                - pows[17]/1.244905998336E16 + pows[18]/2.36887827111936E17 - pows[19]/4.744158915944448E18
+                + pows[20]/9.974898233524224E19 - pows[21]/2.196910513383506E21 + pows[22]/5.058003274999235E22
+                - pows[23]/1.215044786727594E24 + pows[24]/3.040197168492873E25 - pows[25]/7.910717122098802E26
+                + pows[26]/2.13744474397101E28 - pows[27]/5.988878197730094E29 + pows[28]/1.737863564286769E31
+                - pows[29]/5.216639576306424E32 + pows[30]/1.6180424448543652E34 - pows[31]/5.180388352132091E35);
     }
 }
